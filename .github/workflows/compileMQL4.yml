@@ -15,10 +15,10 @@ jobs:
 
     - name: Install Build 509 Compiler
       run: |
-        wget https://download.mql5.com/cdn/web/mt4/mt4build509.exe
+        curl https://download.mql5.com/cdn/web/mt4/mt4build509.exe
         .\mt4build509.exe /S /D="C:\MT4 Build 509"
 
     - name: Compile MQL4 code
       shell: cmd
       run: |
-        "C:\MT4 Build 509\metaeditor.exe" /compile:"ema-cross-ea.mq4"
+        "C:\MT4 Build 509\metaeditor.exe" /compile:"${{ github.workspace }}/ema-cross-ea.mq4"
