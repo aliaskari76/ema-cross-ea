@@ -1,0 +1,26 @@
+name: MQL4 Compile
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install Wine and MetaEditor
+      run: |
+        sudo dpkg --add-architecture i386
+        sudo apt update
+        sudo apt install -y wine-stable
+        wget https://download.mql5.com/cdn/web/metaquotes.software.corp/mt4/mt4setup.exe
+        wine mt4setup.exe /S
+
+    - name: Compile MQL4 code
+      run: |
+        wine "/home/runner/.wine/drive_c/Program Files/MetaTrader 4/metaeditor.exe" /compile:"ema-cross-ea.mq4"
