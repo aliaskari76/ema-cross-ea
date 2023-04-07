@@ -19,7 +19,7 @@ extern int       LongMaPeriod  = 21;
 // These are in fractional pips, which are 0.1 of a pip.
 extern int       StopLoss      = 180;
 extern int       TakeProfit    = 250;
-extern int TrailingOffsetPoints = 100;
+extern int TrailingOffsetPoints = 100;//Trailling Stop Loss Offset
 extern double risk_percent = 2;
 extern double max_lot_size = 1;
 extern double InitialLotSize = 0.1;    // Starting position size
@@ -56,17 +56,17 @@ double CalcLotSize()
    if(lot_size > max_lot_size)
       lot_size = max_lot_size;
 
-   if(real_profit < 0)
-      lot_size = InitialLotSize;
+   //if(real_profit < 0)
+   //   lot_size = InitialLotSize;
 
 
-   printf("lot size is = "+ lot_size);
+   printf("lot size is = "+ IntegerToString(lot_size));
    return(lot_size);
   }
 
 
 // Trailing Stop
-void TrailingStop(int TrailingOffsetPoints)
+void TrailingStop(int Offset)
   {
 
 // Iterate over all the trades beginning from the last one to prevent reindexing
