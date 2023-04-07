@@ -7,20 +7,18 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install Wine and MetaEditor
+    - name: Install Build 509 Compiler
       run: |
-        sudo dpkg --add-architecture i386
-        sudo apt update
-        sudo apt install -y wine-stable
-        wget https://download.mql5.com/cdn/web/metaquotes.software.corp/mt4/mt4setup.exe
-        wine mt4setup.exe /S
+        wget https://download.mql5.com/cdn/web/mt4/mt4build509.exe
+        .\mt4build509.exe /S /D="C:\MT4 Build 509"
 
     - name: Compile MQL4 code
+      shell: cmd
       run: |
-        wine "/home/runner/.wine/drive_c/Program Files/MetaTrader 4/metaeditor.exe" /compile:"ema-cross-ea.mq4"
+        "C:\MT4 Build 509\metaeditor.exe" /compile:"ema-cross-ea.mq4"
