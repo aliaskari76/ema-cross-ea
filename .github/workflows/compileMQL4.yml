@@ -15,7 +15,7 @@ jobs:
 
     - name: Install Build 509 Compiler
       run: |
-        curl https://download.mql5.com/cdn/web/mt4/mt4build509.exe
+        Invoke-WebRequest https://download.mql5.com/cdn/web/mt4/mt4build509.exe -OutFile mt4build509.exe
         .\mt4build509.exe /S /D="C:\MT4 Build 509"
 
     - name: Compile MQL4 code
